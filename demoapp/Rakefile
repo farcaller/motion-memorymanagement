@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+$:.unshift("/Library/RubyMotion/lib")
+require 'motion/project'
+
+$:<< (File.dirname(__FILE__) + '/../lib')
+print "load path #{$:}\n"
+require 'motion-memorymanagement'
+
+Motion::Project::App.setup do |app|
+  # Use `rake config' to see complete project settings.
+  app.name = 'demoapp'
+end
