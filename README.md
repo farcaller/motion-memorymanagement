@@ -12,6 +12,21 @@ require 'motion-memorymanagement'
 
 ### Available API demos
 
+```ruby
+class Test
+  def method
+    "hello"
+  end
+end
+
+t = Test.new
+wt = t.weak!
+
+wt.method # => "hello"
+
+t = nil
+wt.method # => nil
+```
 
 ### Notes
 
