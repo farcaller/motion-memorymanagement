@@ -2,7 +2,7 @@ describe "Memory management" do
   it "keeps zero weak refs zeroed if referenced objects are gone" do
     zwr = MMAutoreleased -> {
       obj = "hello"
-      zwr = MAZeroingWeakRef.refWithTarget(obj).retain # that what happens if you neer to be smarter than runtime!
+      zwr = obj.to_weakref.retain # that what happens if you neer to be smarter than runtime!
       obj = nil
       zwr
     }
@@ -12,7 +12,7 @@ describe "Memory management" do
 
   it "keeps zero weak refs alive if referenced objects are alive" do
     obj = "hello"
-    zwr = obj.weak!
+    zwr = obj.to_weakproxy
     zwr.length.should == 5
   end
 
@@ -24,9 +24,9 @@ describe "Memory management" do
     end
 
     t = MMAutoreleased -> {
-      t = Test.alloc.init.retain
+      Test.alloc.init.retain
     }
-    wt = t.weak!
+    wt = t.to_weakproxy
 
     wt.method.should == "hello"
 
